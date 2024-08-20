@@ -12,7 +12,7 @@ describe CommandHelper do
       expect(described_class.parse_command('PLACE 1, 0,north')).to be_nil
     end
 
-    %w[move LEFT right Report].each do |command|
+    %w[move LEFT right Report exit].each do |command|
       it "returns true for a valid #{command.downcase} command" do
         expect(described_class.parse_command(command)).to eq([command.downcase])
       end
@@ -40,7 +40,7 @@ describe CommandHelper do
       expect(described_class.valid_command?('PLACE 1,invalid,north')).to eq(false)
     end
 
-    %w[move LEFT right report].each do |command|
+    %w[move LEFT right report exit].each do |command|
       it "returns true for a valid #{command} command" do
         expect(described_class.valid_command?(command)).to eq(true)
       end

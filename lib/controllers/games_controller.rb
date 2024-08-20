@@ -1,3 +1,5 @@
+require_relative('../robot_challenge')
+
 class GamesController
   def initialize
     @robot_challenge = RobotChallenge.new

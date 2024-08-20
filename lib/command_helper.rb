@@ -16,6 +16,6 @@ class CommandHelper
 
     return true if entered_command&.downcase == 'place' && !args.nil?
 
-    %w[move left right report].include?(entered_command&.downcase)
+    %w[move left right report exit].include?(entered_command&.downcase)
   end
 end
