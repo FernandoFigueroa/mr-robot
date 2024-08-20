@@ -9,7 +9,7 @@ class Tabletop
   end
 
   def valid_position?(horizontal_coord, vertical_coord)
-    valid_horizontal_position?(horizontal_coord) && valid_vertical_position?(vertical_coord)
+    valid_horizontal_position?(horizontal_coord.to_i) && valid_vertical_position?(vertical_coord.to_i)
   end
 
   private

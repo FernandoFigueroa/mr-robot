@@ -11,8 +11,8 @@ class Robot
     raise ArgumentError, invalid_direction_message unless valid_direction?(direction)
 
     self.direction = direction.downcase
-    self.horizontal_coord = horizontal_coord
-    self.vertical_coord = vertical_coord
+    self.horizontal_coord = horizontal_coord.to_i
+    self.vertical_coord = vertical_coord.to_i
   end
 
   def move
