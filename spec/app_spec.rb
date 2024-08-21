@@ -50,4 +50,26 @@ describe App do
       end
     end
   end
+
+  describe '.import' do
+    it 'loads a file with commands and execute them in order' do
+      expect($stdout).to receive(:print).with("0, 1, NORTH\n")
+      expect($stdout).to receive(:print).with("0, 0, WEST\n")
+      expect($stdout).to receive(:print).with("3, 3, NORTH\n")
+
+      App.new.invoke(:import, ['spec/fixtures/commands.txt'])
+    end
+
+    it 'ignores invalid commands' do
+      expect($stdout).to_not receive(:print)
+
+      App.new.invoke(:import, ['spec/fixtures/invalid_commands.txt'])
+    end
+
+    it 'handles invalid files' do
+      expect($stdout).to receive(:puts).with('Looks like you entered an invalid file')
+
+      App.new.invoke(:import, ['spec/fixtures/not_exists'])
+    end
+  end
 end

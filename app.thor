@@ -29,7 +29,30 @@ class App < Thor
     self.class.handle_exit
   end
 
+  desc 'import spec/fixture/commands.txt', 'Reads a text file with commands and executes them one by one'
+  def import(commands_file)
+    controller = GamesController.new
+    File.open(commands_file) do |file|
+      file.lazy.each_slice(100) do |commands|
+        commands.each do |command|
+          parsed_command, args = CommandHelper.parse_command(command)
+
+          next unless parsed_command
+
+          response = controller.public_send(parsed_command.to_sym, *args)
+          say response if response.is_a? String
+        end
+      end
+    end
+  rescue StandardError
+    puts 'Looks like you entered an invalid file'
+  end
+
   def self.handle_exit
     puts '', 'Bye'
+  end
+
+  def self.exit_on_failure?
+    true
   end
 end
