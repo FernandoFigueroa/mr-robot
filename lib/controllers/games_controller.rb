@@ -29,7 +29,11 @@ class GamesController
     @robot_challenge.rotate_robot('right')
   end
 
-  def method_missing(method, *_args)
-    "Invalid action #{method}"
+  def method_missing(method_name, *_args)
+    "Invalid action #{method_name}"
+  end
+
+  def respond_to_missing?(method_name, include_private = false)
+    super
   end
 end

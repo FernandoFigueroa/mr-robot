@@ -37,15 +37,11 @@ class Robot
   def next_movement
     horizontal_coord = self.horizontal_coord
     vertical_coord = self.vertical_coord
-    case direction
-    when 'north'
-      vertical_coord += DEFAULT_STEP
-    when 'south'
-      vertical_coord -= DEFAULT_STEP
-    when 'east'
-      horizontal_coord += DEFAULT_STEP
-    when 'west'
-      horizontal_coord -= DEFAULT_STEP
+
+    if %w[north south].include?(direction)
+      vertical_coord += next_movement_step
+    else
+      horizontal_coord += next_movement_step
     end
 
     [horizontal_coord, vertical_coord]
@@ -71,5 +67,11 @@ class Robot
 
   def invalid_direction_message
     "Invalid direction, valid directions are: #{VALID_DIRECTIONS.join(', ')}."
+  end
+
+  def next_movement_step
+    return (DEFAULT_STEP * -1) if %w[south west].include?(direction)
+
+    DEFAULT_STEP
   end
 end
