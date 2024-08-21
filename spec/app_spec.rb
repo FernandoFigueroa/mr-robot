@@ -3,7 +3,6 @@
 require 'spec_helper'
 
 describe App do
-  # https://github.com/rails/thor/blob/a43d92fad7ebd77d359b7b96eb3db8a73ef9057c/spec/shell/basic_spec.rb#L48
   describe '.interactive' do
     it 'exists the loop when typing exit' do
       expect(Thor::LineEditor).to receive(:readline).with('Please enter a valid command or type exit to stop ',

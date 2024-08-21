@@ -3,6 +3,7 @@
 require_relative('robot')
 require_relative('tabletop')
 
+# Holds the logic to having a robot on a tabletop
 class RobotChallenge
   def initialize
     @robot = nil
