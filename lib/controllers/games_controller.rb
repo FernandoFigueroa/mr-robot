@@ -2,6 +2,8 @@
 
 require_relative('../robot_challenge')
 
+# Controller class to handle commands entered by the user, a method is created for each valid commands.
+# Is a method does not exist, it'll return an error message
 class GamesController
   def initialize
     @robot_challenge = RobotChallenge.new
@@ -27,7 +29,7 @@ class GamesController
     @robot_challenge.rotate_robot('right')
   end
 
-  def method_missing(m, *_args)
-    "Invalid action #{m}"
+  def method_missing(method, *_args)
+    "Invalid action #{method}"
   end
 end

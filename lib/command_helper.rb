@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
+# Validate and parses a command, to return normalized commands in lowercase
 class CommandHelper
+  VALID_COMMANDS = %w[move left right report exit].freeze
+
   def self.parse_command(command)
     return unless valid_command?(command)
 
@@ -16,6 +19,6 @@ class CommandHelper
 
     return true if entered_command&.downcase == 'place' && !args.nil?
 
-    %w[move left right report exit].include?(entered_command&.downcase)
+    VALID_COMMANDS.include?(entered_command&.downcase)
   end
 end
