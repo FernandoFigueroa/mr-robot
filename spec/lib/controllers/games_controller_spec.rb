@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative('../../../lib/controllers/games_controller')
 
 describe GamesController do
@@ -46,7 +48,6 @@ describe GamesController do
       end
     end
   end
-
 
   describe '#left' do
     context 'with a placed robot' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative('../robot_challenge')
 
 class GamesController
@@ -25,7 +27,7 @@ class GamesController
     @robot_challenge.rotate_robot('right')
   end
 
-  def method_missing(m, *args, &block)
-    return ("Invalid action #{m}")
+  def method_missing(m, *_args)
+    "Invalid action #{m}"
   end
 end
