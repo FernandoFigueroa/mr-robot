@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative('../../lib/tabletop')
+require_relative('../../../lib/models/tabletop')
 
 describe Tabletop do
   let(:tabletop) { described_class.new }
