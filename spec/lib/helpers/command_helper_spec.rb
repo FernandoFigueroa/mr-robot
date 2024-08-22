@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative('../../lib/command_helper')
+require_relative('../../../lib/helpers/command_helper')
 
 describe CommandHelper do
   describe '.parse_command' do

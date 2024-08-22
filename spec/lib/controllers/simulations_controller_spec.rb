@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative('../../../lib/controllers/games_controller')
+require_relative('../../../lib/controllers/simulations_controller')
 
-describe GamesController do
+describe SimulationsController do
   let(:controller) { described_class.new }
 
   it 'gracefully handles invalid commands' do

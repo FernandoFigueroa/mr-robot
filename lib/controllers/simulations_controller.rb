@@ -1,32 +1,32 @@
 # frozen_string_literal: true
 
-require_relative('../robot_challenge')
+require_relative('../models/robot_simulation')
 
 # Controller class to handle commands entered by the user, a method is created for each valid commands.
 # Is a method does not exist, it'll return an error message
-class GamesController
+class SimulationsController
   def initialize
-    @robot_challenge = RobotChallenge.new
+    @robot_simulation = RobotSimulation.new
   end
 
   def place(horizontal_coord, vertical_coord, direction)
-    @robot_challenge.place_robot(horizontal_coord, vertical_coord, direction)
+    @robot_simulation.place_robot(horizontal_coord, vertical_coord, direction)
   end
 
   def move
-    @robot_challenge.move_robot
+    @robot_simulation.move_robot
   end
 
   def report
-    @robot_challenge.robot_status
+    @robot_simulation.robot_status
   end
 
   def left
-    @robot_challenge.rotate_robot('left')
+    @robot_simulation.rotate_robot('left')
   end
 
   def right
-    @robot_challenge.rotate_robot('right')
+    @robot_simulation.rotate_robot('right')
   end
 
   def method_missing(method_name, *_args)

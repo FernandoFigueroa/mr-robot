@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-require_relative('../../lib/robot_challenge')
-require_relative('../../lib/robot')
+require_relative('../../../lib/models/robot_simulation')
+require_relative('../../../lib/models/robot')
 
-describe RobotChallenge do
-  let(:robot_challenge) { described_class.new }
+describe RobotSimulation do
+  let(:robot_simulation) { described_class.new }
 
   describe '#place_robot' do
     let(:horizontal_coord) { 4 }
     let(:vertical_coord) { 1 }
     let(:direction) { 'north' }
-    let(:robot) { robot_challenge.place_robot(horizontal_coord, vertical_coord, direction) }
+    let(:robot) { robot_simulation.place_robot(horizontal_coord, vertical_coord, direction) }
 
     context 'with valid position' do
       it { expect(robot).to be_a Robot }
@@ -40,52 +40,52 @@ describe RobotChallenge do
 
   describe '#move_robot' do
     context 'when no robot has been placed' do
-      it { expect(robot_challenge.move_robot).to be_nil }
+      it { expect(robot_simulation.move_robot).to be_nil }
     end
 
     context 'when a robot has been placed and has a valid movement' do
       before do
-        robot_challenge.place_robot(0, 0, 'east')
+        robot_simulation.place_robot(0, 0, 'east')
       end
 
       it 'moves the robot to the right direction' do
-        robot = robot_challenge.move_robot
+        robot = robot_simulation.move_robot
         expect(robot.coordinates).to eq([1, 0])
       end
     end
 
     context 'when a robot has been placed and has no available movement' do
       before do
-        robot_challenge.place_robot(0, 0, 'west')
+        robot_simulation.place_robot(0, 0, 'west')
       end
 
-      it { expect(robot_challenge.move_robot).to be_nil }
+      it { expect(robot_simulation.move_robot).to be_nil }
     end
   end
 
   describe '#robot_status' do
     context 'when no robot has been placed' do
-      it { expect(robot_challenge.robot_status).to be_nil }
+      it { expect(robot_simulation.robot_status).to be_nil }
     end
 
     context 'when a robot has been placed' do
       before do
-        robot_challenge.place_robot(0, 0, 'east')
+        robot_simulation.place_robot(0, 0, 'east')
       end
 
-      it { expect(robot_challenge.robot_status).to eq('0, 0, EAST') }
+      it { expect(robot_simulation.robot_status).to eq('0, 0, EAST') }
     end
   end
 
   describe '#rotate_robot' do
     context 'when no robot has been placed' do
-      it { expect(robot_challenge.rotate_robot('left')).to be_nil }
+      it { expect(robot_simulation.rotate_robot('left')).to be_nil }
     end
 
     context 'when a robot has been placed' do
-      let(:robot) { robot_challenge.rotate_robot('left') }
+      let(:robot) { robot_simulation.rotate_robot('left') }
       before do
-        robot_challenge.place_robot(0, 0, 'east')
+        robot_simulation.place_robot(0, 0, 'east')
       end
 
       it { expect(robot).to be_a Robot }
