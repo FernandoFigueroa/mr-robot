@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative 'lib/controllers/games_controller'
-require_relative 'lib/command_helper'
+require_relative 'lib/controllers/simulations_controller'
+require_relative 'lib/helpers/command_helper'
 
 # App
 # Main application class, executed with Thor, should be considered as the entry point
 class App < Thor
   desc 'interactive', 'Runs the app interactive mode, requesting/executing commands one at the time'
   def interactive
-    controller = GamesController.new
+    controller = SimulationsController.new
     loop do
       command = ask 'Please enter a valid command or type exit to stop'
       parsed_command, args = CommandHelper.parse_command(command)
@@ -31,7 +31,7 @@ class App < Thor
 
   desc 'import spec/fixture/commands.txt', 'Reads a text file with commands and executes them one by one'
   def import(commands_file)
-    controller = GamesController.new
+    controller = SimulationsController.new
     File.open(commands_file) do |file|
       file.lazy.each_slice(100) do |commands|
         commands.each do |command|
