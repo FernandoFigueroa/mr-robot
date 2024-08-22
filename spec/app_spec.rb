@@ -5,6 +5,7 @@ require 'spec_helper'
 describe App do
   describe '.interactive' do
     it 'exits the loop when typing exit' do
+      expect($stdout).to receive(:print).with("Please enter a valid command or type exit to stop\n")
       expect(Thor::LineEditor).to receive(:readline).with('What would you like the robot to do? ',
                                                           {}).and_return('exit')
       expect($stdout).to receive(:puts).with('', 'Bye')
@@ -14,6 +15,7 @@ describe App do
 
     [SystemExit, Interrupt].each do |exception|
       it "handles the exception #{exception}" do
+        expect($stdout).to receive(:print).with("Please enter a valid command or type exit to stop\n")
         expect(Thor::LineEditor).to receive(:readline).and_raise(exception)
         expect($stdout).to receive(:puts).with('', 'Bye')
 
