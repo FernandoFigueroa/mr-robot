@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Robot
 # Handles the robot positioning and movement, not aware of where it's being placed
 class Robot
   attr_accessor :horizontal_coord, :vertical_coord, :direction

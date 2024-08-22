@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Tabletop
 # Handles the table dimensions and positions, not aware of what it's being placed
 class Tabletop
   DEFAULT_UNITS = 5

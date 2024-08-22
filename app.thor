@@ -8,9 +8,10 @@ require_relative 'lib/helpers/command_helper'
 class App < Thor
   desc 'interactive', 'Runs the app interactive mode, requesting/executing commands one at the time'
   def interactive
-    controller = SimulationsController.new
+    controller = SimulationsController.new(echo: true)
+    say 'Please enter a valid command or type exit to stop'
     loop do
-      command = ask 'Please enter a valid command or type exit to stop'
+      command = ask 'What would you like the robot to do?'
       parsed_command, args = CommandHelper.parse_command(command)
 
       if parsed_command == 'exit'
@@ -22,7 +23,7 @@ class App < Thor
         response = controller.public_send(parsed_command.to_sym, *args)
         say response if response.is_a? String
       else
-        say 'Invalid command'
+        say 'Please enter a valid command.'
       end
     end
   rescue SystemExit, Interrupt
@@ -45,7 +46,7 @@ class App < Thor
       end
     end
   rescue StandardError
-    puts 'Looks like you entered an invalid file'
+    puts 'Looks like you entered an invalid file.'
   end
 
   def self.handle_exit
