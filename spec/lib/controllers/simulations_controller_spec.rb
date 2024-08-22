@@ -3,7 +3,8 @@
 require_relative('../../../lib/controllers/simulations_controller')
 
 describe SimulationsController do
-  let(:controller) { described_class.new }
+  let(:echo) { false }
+  let(:controller) { described_class.new(echo:) }
 
   it 'gracefully handles invalid commands' do
     expect(controller.wrong).to eq('Invalid action wrong')
@@ -17,6 +18,14 @@ describe SimulationsController do
     context 'with invalid arguments' do
       it 'returns nil when the placing fails' do
         expect(controller.place(-1, '0', 'North')).to be_nil
+      end
+    end
+
+    context 'with echo enabled' do
+      let(:echo) { true }
+
+      it 'returns an ignored command message' do
+        expect(controller.place(-1, '0', 'North')).to eq("Command 'place -1, 0, North' ignored.")
       end
     end
   end
@@ -39,12 +48,28 @@ describe SimulationsController do
         it 'returns nil when the movement fails' do
           expect(controller.move).to be_nil
         end
+
+        context 'with echo enabled' do
+          let(:echo) { true }
+
+          it 'returns an ignored command message' do
+            expect(controller.move).to eq("Command 'move' ignored.")
+          end
+        end
       end
     end
 
     context 'without a placed robot' do
       it 'returns nil when there is no robot' do
         expect(controller.move).to be_nil
+      end
+
+      context 'with echo enabled' do
+        let(:echo) { true }
+
+        it 'returns an ignored command message' do
+          expect(controller.move).to eq("Command 'move' ignored.")
+        end
       end
     end
   end
@@ -64,6 +89,14 @@ describe SimulationsController do
       it 'returns nil when there is no robot' do
         expect(controller.left).to be_nil
       end
+
+      context 'with echo enabled' do
+        let(:echo) { true }
+
+        it 'returns an ignored command message' do
+          expect(controller.left).to eq("Command 'left' ignored.")
+        end
+      end
     end
   end
 
@@ -82,6 +115,14 @@ describe SimulationsController do
       it 'returns nil when there is no robot' do
         expect(controller.right).to be_nil
       end
+
+      context 'with echo enabled' do
+        let(:echo) { true }
+
+        it 'returns an ignored command message' do
+          expect(controller.right).to eq("Command 'right' ignored.")
+        end
+      end
     end
   end
 
@@ -99,6 +140,14 @@ describe SimulationsController do
     context 'without a placed robot' do
       it 'returns nil when there is no robot' do
         expect(controller.report).to be_nil
+      end
+
+      context 'with echo enabled' do
+        let(:echo) { true }
+
+        it 'returns an ignored command message' do
+          expect(controller.report).to eq("Command 'report' ignored.")
+        end
       end
     end
   end

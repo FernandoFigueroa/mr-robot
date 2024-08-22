@@ -1,24 +1,30 @@
 # frozen_string_literal: true
 
+# CommandHelper
 # Validate and parses a command, to return normalized commands in lowercase
 class CommandHelper
   VALID_COMMANDS = %w[move left right report exit].freeze
+  VALID_COMMAND_REGEX = /(\w+)\s?(\d,\d,\w+)?/i
 
   def self.parse_command(command)
     return unless valid_command?(command)
 
-    entered_command, args = command.match(/(\w+)\s?(\d,\d,\w+)?/i).captures
+    entered_command, args = command.match(VALID_COMMAND_REGEX).captures
 
-    return [entered_command.downcase, args.split(',')] if entered_command.downcase == 'place' && !args.nil?
+    return ['place', args.split(',')] if entered_command.strip.downcase == 'place' && !args.nil?
 
-    [entered_command.downcase]
+    [entered_command.strip.downcase]
   end
 
   def self.valid_command?(command)
-    entered_command, args = command&.match(/(\w+)\s?(\d,\d,\w+)?/i)&.captures
+    return false unless command.is_a?(String)
 
-    return true if entered_command&.downcase == 'place' && !args.nil?
+    entered_command, args = command.strip.match(VALID_COMMAND_REGEX)&.captures
 
-    VALID_COMMANDS.include?(entered_command&.downcase)
+    return false unless entered_command
+
+    return true if entered_command.strip.downcase == 'place' && !args.nil?
+
+    VALID_COMMANDS.include?(entered_command.strip.downcase)
   end
 end

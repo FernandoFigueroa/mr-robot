@@ -3,6 +3,7 @@
 require_relative('robot')
 require_relative('tabletop')
 
+# RobotSimulation
 # Holds the logic to having a robot on a tabletop
 class RobotSimulation
   def initialize
