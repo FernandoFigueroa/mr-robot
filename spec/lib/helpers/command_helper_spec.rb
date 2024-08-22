@@ -8,6 +8,10 @@ describe CommandHelper do
       expect(described_class.parse_command('PLACE 1,0,north')).to eq(['place', %w[1 0 north]])
     end
 
+    it 'strips the command' do
+      expect(described_class.parse_command(' PLACE 1,0,north ')).to eq(['place', %w[1 0 north]])
+    end
+
     it 'returns nil for invalid place commands' do
       expect(described_class.parse_command('PLACE 1, 0,north')).to be_nil
     end
